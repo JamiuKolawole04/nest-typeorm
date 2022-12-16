@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { User } from 'src/entities';
-import { createUserParams } from 'src/utils';
+import { createUserParams, updateUserParams } from 'src/utils';
 
 @Injectable()
 export class UsersService {
@@ -19,5 +19,21 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  fetchUser() {}
+  public fetchUser() {
+    return this.userRepository.find({
+      order: { createdAt: 'DESC' },
+    });
+  }
+
+  public updateUser(id: number, updateUserDetails: updateUserParams) {
+    return this.userRepository.update({ id }, { ...updateUserDetails });
+  }
+
+  public findUserById(id: number) {
+    return this.userRepository.findOneBy({ id: id });
+  }
+
+  public deleteUser(id: string) {
+    return this.userRepository.delete(id);
+  }
 }
