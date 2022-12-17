@@ -1,19 +1,30 @@
-import {Entity, PrimaryGeneratedColumn, Column} from"typeorm"
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Profile } from './profile';
 
-@Entity({name: "user"})
+@Entity({ name: 'user' })
 export class User {
-    @PrimaryGeneratedColumn("uuid")
-    id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: number;
 
-    @Column({unique: true})
-    username: string;
+  @Column({ unique: true })
+  username: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password: string;
 
-    @Column()
-    createdAt: Date
+  @Column()
+  createdAt: Date;
 
-    @Column({nullable: true})
-    authStartegy: string;
+  @Column({ nullable: true })
+  authStartegy: string;
+
+  @OneToOne(() => Profile)
+  @JoinColumn()
+  profile: Profile;
 }
