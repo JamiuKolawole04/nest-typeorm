@@ -114,4 +114,7 @@ export class UsersController {
       user,
     };
   }
+
+  @Post(':id/posts')
+  async createUserPost(@Param('id') id: string) {}
 }
