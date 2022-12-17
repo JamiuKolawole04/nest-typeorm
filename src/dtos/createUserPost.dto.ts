@@ -1,1 +1,4 @@
-export class CreateUserPostDto {}
+export class CreateUserPostDto {
+  title: string;
+  description: string;
+}

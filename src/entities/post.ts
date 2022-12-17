@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 import { User } from './user';
 
@@ -13,6 +13,6 @@ export class Post {
   @Column()
   description: string;
 
-  @ManyToMany(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.posts)
   user: User;
 }

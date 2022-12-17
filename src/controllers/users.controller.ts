@@ -11,7 +11,12 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import { CreateUserDto, UpdateUserDto, CreateUserProfileDto } from 'src/dtos';
+import {
+  CreateUserDto,
+  UpdateUserDto,
+  CreateUserProfileDto,
+  CreateUserPostDto,
+} from 'src/dtos';
 import { UsersService } from 'src/services';
 
 @Controller('users')
@@ -116,5 +121,17 @@ export class UsersController {
   }
 
   @Post(':id/posts')
-  async createUserPost(@Param('id') id: string) {}
+  async createUserPost(
+    @Param('id', ParseUUIDPipe) id: number,
+    @Body() createUserPostDto: CreateUserPostDto,
+  ) {
+    const post = await this.userService.createUserPost(id, createUserPostDto);
+
+    return {
+      statusCode: 201,
+      success: true,
+      message: 'post created successfully',
+      post,
+    };
+  }
 }

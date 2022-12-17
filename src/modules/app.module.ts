@@ -17,6 +17,7 @@ import { UsersModule } from './users.module';
       database: 'nestjs_mysql_tutorial',
       entities: [User, Profile, Post],
       synchronize: true,
+      // dropSchema: true,
     }),
     UsersModule,
   ],
